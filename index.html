@@ -1,0 +1,657 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Exam Prep: Speaking & Writing Masterclass</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600;700;800&family=Playfair+Display:ital,wght@0,600;0,700;1,600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        body {
+            font-family: 'Outfit', sans-serif;
+            background-color: #0f172a;
+            color: #f8fafc;
+            background-image: 
+                radial-gradient(circle at 15% 50%, rgba(99, 102, 241, 0.15), transparent 25%),
+                radial-gradient(circle at 85% 30%, rgba(16, 185, 129, 0.15), transparent 25%);
+            background-attachment: fixed;
+            line-height: 1.6;
+        }
+        .serif { font-family: 'Playfair Display', serif; }
+
+        /* Glassmorphism Panels */
+        .glass-panel {
+            background: rgba(30, 41, 59, 0.7);
+            backdrop-filter: blur(16px);
+            -webkit-backdrop-filter: blur(16px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3);
+        }
+
+        /* Tabs */
+        .tab-content { display: none; animation: fadeIn 0.4s ease-in-out; }
+        .tab-content.active { display: block; }
+        
+        .tab-btn { transition: all 0.3s ease; }
+        .tab-btn.active.writing { background-color: #6366f1; color: white; border-color: #6366f1; box-shadow: 0 0 20px rgba(99, 102, 241, 0.4); }
+        .tab-btn.active.speaking { background-color: #10b981; color: white; border-color: #10b981; box-shadow: 0 0 20px rgba(16, 185, 129, 0.4); }
+
+        /* Timer Circle */
+        .timer-circle {
+            transition: stroke-dashoffset 1s linear;
+            transform: rotate(-90deg);
+            transform-origin: 50% 50%;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .sortable-item { transition: transform 0.2s, box-shadow 0.2s; cursor: grab; }
+        .sortable-item:active { cursor: grabbing; }
+        .sortable-item.dragging { opacity: 0.5; transform: scale(0.98); }
+        .sortable-item.over { border-color: #818cf8; background-color: rgba(49, 46, 129, 0.5); }
+
+        /* Scrollbar */
+        ::-webkit-scrollbar { width: 8px; }
+        ::-webkit-scrollbar-track { background: #0f172a; }
+        ::-webkit-scrollbar-thumb { background: #475569; border-radius: 4px; }
+        ::-webkit-scrollbar-thumb:hover { background: #64748b; }
+    </style>
+</head>
+<body class="min-h-screen flex flex-col items-center py-10 px-4 md:px-8">
+
+    <header class="w-full max-w-6xl text-center mb-10">
+        <div class="inline-block px-4 py-1.5 rounded-full border border-slate-600 bg-slate-800 text-slate-300 text-xs font-bold tracking-[0.2em] uppercase mb-4 shadow-sm">
+            Exam Preparation Session
+        </div>
+        <h1 class="text-4xl md:text-6xl font-extrabold serif mb-4 leading-tight text-white">
+            Writing & Speaking <span class="text-transparent bg-clip-text bg-gradient-to-r from-indigo-400 to-emerald-400 italic">Masterclass</span>
+        </h1>
+        <p class="text-slate-400 text-lg md:text-xl max-w-2xl mx-auto">
+            Master the art of engaging introductions, specific supporting examples, and structured, confident speech.
+        </p>
+
+        <!-- Navigation Tabs -->
+        <div class="flex flex-wrap justify-center gap-4 mt-8">
+            <button onclick="switchTab('writing')" id="btn-writing" class="tab-btn active writing px-8 py-3 rounded-full border border-slate-600 text-slate-300 font-bold uppercase tracking-widest text-sm hover:border-indigo-400">
+                <i class="fa-solid fa-pen-nib mr-2"></i> Writing Focus
+            </button>
+            <button onclick="switchTab('speaking')" id="btn-speaking" class="tab-btn speaking px-8 py-3 rounded-full border border-slate-600 text-slate-300 font-bold uppercase tracking-widest text-sm hover:border-emerald-400">
+                <i class="fa-solid fa-microphone-lines mr-2"></i> Speaking Focus
+            </button>
+        </div>
+    </header>
+
+    <main class="w-full max-w-6xl w-full">
+
+        <!-- ========================================== -->
+        <!-- WRITING MODULE                             -->
+        <!-- ========================================== -->
+        <div id="writing-tab" class="tab-content active">
+            
+            <div class="grid grid-cols-1 lg:grid-cols-2 gap-8 mb-8">
+                
+                <!-- Section 1: The Hook & Intro -->
+                <div class="glass-panel p-8 rounded-3xl border-t-4 border-t-indigo-500 flex flex-col h-full">
+                    <div class="flex items-center gap-4 mb-6 border-b border-slate-700 pb-4">
+                        <div class="w-12 h-12 rounded-full bg-indigo-500/20 text-indigo-400 flex items-center justify-center text-xl border border-indigo-500/30">
+                            <i class="fa-solid fa-fish-fins"></i>
+                        </div>
+                        <h2 class="text-2xl font-bold text-white uppercase tracking-widest">1. The Introduction</h2>
+                    </div>
+                    
+                    <p class="text-slate-300 mb-6">A great introduction doesn't just start the essay; it grabs the reader's attention and clearly states your opinion. Follow the <strong>H.B.T. Formula</strong>:</p>
+
+                    <div class="space-y-4">
+                        <div class="bg-slate-900/80 p-4 rounded-xl border border-slate-700">
+                            <h3 class="text-indigo-400 font-bold uppercase tracking-wider text-sm mb-2">1. The Hook (Grab Attention)</h3>
+                            <p class="text-sm text-slate-400 mb-2">Start with a question, a surprising fact, or an imaginative scenario.</p>
+                            <p class="text-sm text-white italic bg-indigo-900/30 p-2 rounded border-l-2 border-indigo-500">"Imagine waking up to a world where plastic bags outnumber fish in the ocean."</p>
+                        </div>
+                        
+                        <div class="bg-slate-900/80 p-4 rounded-xl border border-slate-700">
+                            <h3 class="text-indigo-400 font-bold uppercase tracking-wider text-sm mb-2">2. The Bridge (Give Context)</h3>
+                            <p class="text-sm text-slate-400 mb-2">Explain the background of the topic to connect your hook to the main idea.</p>
+                            <p class="text-sm text-white italic bg-indigo-900/30 p-2 rounded border-l-2 border-indigo-500">"In recent years, environmental pollution has become one of the most serious challenges facing global communities."</p>
+                        </div>
+
+                        <div class="bg-slate-900/80 p-4 rounded-xl border border-slate-700">
+                            <h3 class="text-indigo-400 font-bold uppercase tracking-wider text-sm mb-2">3. The Thesis (Your Opinion)</h3>
+                            <p class="text-sm text-slate-400 mb-2">Clearly state what your essay will prove.</p>
+                            <p class="text-sm text-white italic bg-indigo-900/30 p-2 rounded border-l-2 border-indigo-500">"Because of this, single-use plastics must be completely banned to protect marine life and ensure a healthy future."</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Section 2: Specific Examples in Body Paragraphs -->
+                <div class="glass-panel p-8 rounded-3xl border-t-4 border-t-sky-500 flex flex-col h-full">
+                    <div class="flex items-center gap-4 mb-6 border-b border-slate-700 pb-4">
+                        <div class="w-12 h-12 rounded-full bg-sky-500/20 text-sky-400 flex items-center justify-center text-xl border border-sky-500/30">
+                            <i class="fa-solid fa-magnifying-glass-plus"></i>
+                        </div>
+                        <h2 class="text-2xl font-bold text-white uppercase tracking-widest">2. Supporting Examples</h2>
+                    </div>
+
+                    <p class="text-slate-300 mb-4">Vague body paragraphs lose points. When you make a point, you must back it up with a <strong>specific, real-world example</strong>.</p>
+
+                    <div class="grid grid-cols-2 gap-4 mb-6">
+                        <div class="bg-rose-950/30 p-4 rounded-xl border border-rose-900/50">
+                            <p class="text-rose-400 font-bold uppercase tracking-wider text-xs mb-2"><i class="fa-solid fa-xmark mr-1"></i> Vague & Weak</p>
+                            <p class="text-sm text-slate-300 italic">"Technology makes learning easier because we can use things to study better."</p>
+                        </div>
+                        <div class="bg-emerald-950/30 p-4 rounded-xl border border-emerald-900/50">
+                            <p class="text-emerald-400 font-bold uppercase tracking-wider text-xs mb-2"><i class="fa-solid fa-check mr-1"></i> Specific & Strong</p>
+                            <p class="text-sm text-slate-300 italic">"Technology makes learning easier. <strong class="text-emerald-300">For instance, students can use VR headsets to visually explore historical sites like the Colosseum.</strong>"</p>
+                        </div>
+                    </div>
+
+                    <div class="bg-slate-900/80 p-5 rounded-xl border border-slate-700 mt-auto">
+                        <h3 class="text-sky-400 font-bold uppercase tracking-wider text-sm mb-3">Target Language for Examples:</h3>
+                        <ul class="space-y-2 text-sm text-slate-300 font-medium">
+                            <li><i class="fa-solid fa-angle-right text-sky-500 mr-2"></i> "A clear example of this is..."</li>
+                            <li><i class="fa-solid fa-angle-right text-sky-500 mr-2"></i> "To illustrate this point, consider..."</li>
+                            <li><i class="fa-solid fa-angle-right text-sky-500 mr-2"></i> "Take [Topic] for example. When..."</li>
+                            <li><i class="fa-solid fa-angle-right text-sky-500 mr-2"></i> "Specifically, we can see this when..."</li>
+                        </ul>
+                    </div>
+                </div>
+
+            </div>
+
+            <div class="flex flex-col md:flex-row justify-between items-center border-b border-slate-700 pb-4 mt-12 mb-6 gap-4">
+                <h2 class="text-2xl font-bold text-white uppercase tracking-widest"><i class="fa-solid fa-laptop-code text-indigo-400 mr-2"></i> Interactive Practice Zone</h2>
+                <div class="flex flex-col items-end">
+                    <button onclick="saveWork()" class="bg-indigo-600 hover:bg-indigo-500 text-white font-bold py-2.5 px-6 rounded-full shadow-lg transition-all text-xs tracking-widest uppercase flex items-center gap-2">
+                        <i class="fa-solid fa-floppy-disk"></i> <span class="save-btn-text">Save My Work</span>
+                    </button>
+                    <p class="text-[10px] text-slate-500 mt-2 italic text-right max-w-xs">
+                        *Caution: Work is saved locally to this specific device/browser only. It will not sync to the cloud and will be lost if you clear your browser history.
+                    </p>
+                </div>
+            </div>
+
+            <div class="grid grid-cols-1 gap-8 mb-8">
+                
+                <!-- Activity 1: Drag & Drop Intro Builder -->
+                <div class="glass-panel p-6 md:p-8 rounded-3xl border border-slate-600 bg-slate-800/50">
+                    <div class="flex justify-between items-start mb-6">
+                        <div>
+                            <h3 class="text-xl font-bold text-white uppercase tracking-widest mb-2"><i class="fa-solid fa-arrows-up-down text-indigo-400 mr-2"></i> Activity 1: Intro Builder</h3>
+                            <p class="text-slate-400 text-sm">Drag and drop the sentences below (or use the arrows) to organize them into the perfect <strong>Hook ➔ Bridge ➔ Thesis</strong> paragraph order. Topic: <em>Artificial Intelligence in Schools</em>.</p>
+                        </div>
+                    </div>
+                    
+                    <div class="space-y-3" id="sortable-list">
+                        <!-- Item 1 (Thesis) -->
+                        <div class="sortable-item bg-slate-900 p-4 rounded-xl border border-slate-700 flex items-center gap-4" draggable="true" data-type="thesis">
+                            <div class="flex flex-col gap-1 text-slate-500">
+                                <button onclick="moveUp(this)" class="hover:text-indigo-400 transition-colors"><i class="fa-solid fa-chevron-up"></i></button>
+                                <button onclick="moveDown(this)" class="hover:text-indigo-400 transition-colors"><i class="fa-solid fa-chevron-down"></i></button>
+                            </div>
+                            <p class="text-slate-200 text-sm flex-grow">"Although some fear the loss of human connection, AI should be integrated into education because it provides personalized learning and prepares students for a tech-driven future."</p>
+                            <i class="fa-solid fa-grip-vertical text-slate-600 cursor-grab"></i>
+                        </div>
+                        
+                        <!-- Item 2 (Hook) -->
+                        <div class="sortable-item bg-slate-900 p-4 rounded-xl border border-slate-700 flex items-center gap-4" draggable="true" data-type="hook">
+                            <div class="flex flex-col gap-1 text-slate-500">
+                                <button onclick="moveUp(this)" class="hover:text-indigo-400 transition-colors"><i class="fa-solid fa-chevron-up"></i></button>
+                                <button onclick="moveDown(this)" class="hover:text-indigo-400 transition-colors"><i class="fa-solid fa-chevron-down"></i></button>
+                            </div>
+                            <p class="text-slate-200 text-sm flex-grow">"Imagine walking into a classroom where your teacher is not a human, but a glowing hologram powered by complex computer code."</p>
+                            <i class="fa-solid fa-grip-vertical text-slate-600 cursor-grab"></i>
+                        </div>
+
+                        <!-- Item 3 (Bridge) -->
+                        <div class="sortable-item bg-slate-900 p-4 rounded-xl border border-slate-700 flex items-center gap-4" draggable="true" data-type="bridge">
+                            <div class="flex flex-col gap-1 text-slate-500">
+                                <button onclick="moveUp(this)" class="hover:text-indigo-400 transition-colors"><i class="fa-solid fa-chevron-up"></i></button>
+                                <button onclick="moveDown(this)" class="hover:text-indigo-400 transition-colors"><i class="fa-solid fa-chevron-down"></i></button>
+                            </div>
+                            <p class="text-slate-200 text-sm flex-grow">"With the rapid advancement of technology, this futuristic scenario is quickly becoming a reality in schools worldwide."</p>
+                            <i class="fa-solid fa-grip-vertical text-slate-600 cursor-grab"></i>
+                        </div>
+                    </div>
+
+                    <div class="mt-6 flex justify-between items-center">
+                        <span id="sortable-feedback" class="text-sm font-bold uppercase tracking-widest hidden"></span>
+                        <button onclick="checkIntroOrder()" class="bg-indigo-600 hover:bg-indigo-500 text-white font-bold py-2.5 px-6 rounded-full uppercase tracking-widest text-xs transition-all shadow-md ml-auto">
+                            Check Order
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Activity 2: Fill in the Missing Intro -->
+                <div class="glass-panel p-6 md:p-8 rounded-3xl border border-slate-600 bg-slate-800/50">
+                    <h3 class="text-xl font-bold text-white uppercase tracking-widest mb-2"><i class="fa-solid fa-pen-nib text-sky-400 mr-2"></i> Activity 2: The Missing Links</h3>
+                    <p class="text-slate-400 text-sm mb-6">Topic: <strong>A Cashless Society</strong>. The background context (Bridge) has been written for you. As a class, brainstorm a creative <strong>Hook</strong> and a strong <strong>Thesis statement</strong> to complete the paragraph.</p>
+                    
+                    <div class="bg-slate-900 p-6 rounded-xl border border-slate-700 space-y-4">
+                        <div>
+                            <span class="text-xs text-indigo-400 font-bold uppercase tracking-widest mb-1 block">1. The Hook (Grab Attention)</span>
+                            <textarea id="hook-input" class="w-full bg-slate-800 border border-slate-600 rounded-lg p-3 text-slate-200 text-sm focus:outline-none focus:border-indigo-500 resize-none" rows="2" placeholder="Write your hook here..."></textarea>
+                        </div>
+                        
+                        <div class="bg-slate-800/50 p-4 rounded-lg border border-slate-700">
+                            <span class="text-xs text-slate-500 font-bold uppercase tracking-widest mb-1 block">2. The Bridge (Given)</span>
+                            <p class="text-slate-300 text-sm italic">"Over the last decade, digital payments, credit cards, and mobile wallets have increasingly replaced physical coins and paper money in our daily transactions."</p>
+                        </div>
+
+                        <div>
+                            <span class="text-xs text-sky-400 font-bold uppercase tracking-widest mb-1 block">3. The Thesis (Opinion + Reasons)</span>
+                            <textarea id="thesis-input" class="w-full bg-slate-800 border border-slate-600 rounded-lg p-3 text-slate-200 text-sm focus:outline-none focus:border-sky-500 resize-none" rows="2" placeholder="Therefore, society should... because..."></textarea>
+                        </div>
+                    </div>
+
+                    <div class="mt-6 flex justify-between items-center">
+                        <button onclick="toggleExampleAnswers()" class="text-slate-400 hover:text-white text-xs font-bold uppercase tracking-widest transition-colors flex items-center gap-2">
+                            <i class="fa-solid fa-eye"></i> Show Example Answers
+                        </button>
+                    </div>
+
+                    <!-- Hidden Example Answers -->
+                    <div id="example-answers" class="hidden mt-4 bg-emerald-950/30 p-4 rounded-xl border border-emerald-900/50 space-y-3">
+                        <p class="text-sm text-slate-300"><strong class="text-emerald-400">Example Hook:</strong> "Have you ever left your house with just your smartphone, only to realize you didn't need a physical wallet at all to survive the day?"</p>
+                        <p class="text-sm text-slate-300"><strong class="text-emerald-400">Example Thesis:</strong> "Therefore, society should completely transition to a cashless system because it significantly reduces street crime and makes daily life far more convenient."</p>
+                    </div>
+                </div>
+
+                <!-- Activity 3: Specific Examples Practice -->
+                <div class="glass-panel p-6 md:p-8 rounded-3xl border border-slate-600 bg-slate-800/50">
+                    <h3 class="text-xl font-bold text-white uppercase tracking-widest mb-2"><i class="fa-solid fa-magnifying-glass-plus text-emerald-400 mr-2"></i> Activity 3: Make it Specific</h3>
+                    <p class="text-slate-400 text-sm mb-6">Read the weak, general statements below. Add a <strong>specific, real-world example</strong> using the target language to make the argument undeniably strong.</p>
+                    
+                    <div class="space-y-6">
+                        <!-- Practice 1 -->
+                        <div class="bg-slate-900 p-5 rounded-xl border border-slate-700">
+                            <span class="text-xs text-emerald-400 font-bold uppercase tracking-widest mb-1 block">Prompt 1: Technology & Education</span>
+                            <p class="text-slate-300 text-sm italic mb-3">"Online learning is highly beneficial because it saves students a lot of time."</p>
+                            <textarea id="ex1-input" class="w-full bg-slate-800 border border-slate-600 rounded-lg p-3 text-slate-200 text-sm focus:outline-none focus:border-emerald-500 resize-none" rows="2" placeholder="For instance, ..."></textarea>
+                            <div class="mt-3 flex justify-between items-center">
+                                <button onclick="toggleAnswer('example-3a')" class="text-slate-400 hover:text-white text-xs font-bold uppercase tracking-widest transition-colors flex items-center gap-2">
+                                    <i class="fa-solid fa-eye"></i> Show Example
+                                </button>
+                            </div>
+                            <div id="example-3a" class="hidden mt-3 bg-emerald-950/30 p-4 rounded-xl border border-emerald-900/50">
+                                <p class="text-sm text-slate-300"><strong class="text-emerald-400">Example:</strong> "For instance, a student living in the suburbs avoids a two-hour daily bus commute, allowing them to use that extra time to sleep or study for upcoming exams."</p>
+                            </div>
+                        </div>
+
+                        <!-- Practice 2 -->
+                        <div class="bg-slate-900 p-5 rounded-xl border border-slate-700">
+                            <span class="text-xs text-sky-400 font-bold uppercase tracking-widest mb-1 block">Prompt 2: Environment & City Life</span>
+                            <p class="text-slate-300 text-sm italic mb-3">"City municipalities should make public transportation free to help the environment."</p>
+                            <textarea id="ex2-input" class="w-full bg-slate-800 border border-slate-600 rounded-lg p-3 text-slate-200 text-sm focus:outline-none focus:border-sky-500 resize-none" rows="2" placeholder="To illustrate this point, consider..."></textarea>
+                            <div class="mt-3 flex justify-between items-center">
+                                <button onclick="toggleAnswer('example-3b')" class="text-slate-400 hover:text-white text-xs font-bold uppercase tracking-widest transition-colors flex items-center gap-2">
+                                    <i class="fa-solid fa-eye"></i> Show Example
+                                </button>
+                            </div>
+                            <div id="example-3b" class="hidden mt-3 bg-sky-950/30 p-4 rounded-xl border border-sky-900/50">
+                                <p class="text-sm text-slate-300"><strong class="text-sky-400">Example:</strong> "To illustrate this point, consider Luxembourg, which made all trains and buses free in 2020. This immediately encouraged thousands of people to leave their cars at home, reducing toxic exhaust fumes in the city center."</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="flex flex-col items-center justify-center mt-4 mb-8">
+                    <button onclick="saveWork()" class="bg-indigo-600 hover:bg-indigo-500 text-white font-bold py-3 px-8 rounded-full shadow-lg transition-all text-sm tracking-widest uppercase flex items-center gap-2">
+                        <i class="fa-solid fa-floppy-disk"></i> <span class="save-btn-text">Save My Work</span>
+                    </button>
+                    <p class="text-[10px] text-slate-500 mt-3 italic text-center max-w-md">
+                        *Caution: Work is saved locally to this specific device/browser only. It will not sync to the cloud and will be lost if you clear your browser history.
+                    </p>
+                </div>
+
+            </div>
+
+        </div>
+
+        <!-- ========================================== -->
+        <!-- SPEAKING MODULE                            -->
+        <!-- ========================================== -->
+        <div id="speaking-tab" class="tab-content">
+            
+            <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 mb-8">
+                
+                <!-- Left Column: Strategy & Language -->
+                <div class="lg:col-span-7 flex flex-col gap-6">
+                    
+                    <!-- Planning Pattern -->
+                    <div class="glass-panel p-6 md:p-8 rounded-3xl border-t-4 border-t-emerald-500">
+                        <h2 class="text-2xl font-bold text-white uppercase tracking-widest mb-2 flex items-center gap-3">
+                            <i class="fa-solid fa-sitemap text-emerald-400"></i> The Planning Pattern
+                        </h2>
+                        <p class="text-slate-400 text-sm mb-6">How to organize a 1-Minute "Problem & Solution" speech effectively.</p>
+
+                        <div class="space-y-3">
+                            <div class="flex items-start gap-4 bg-slate-900/60 p-4 rounded-xl border border-slate-700">
+                                <div class="w-10 h-10 rounded-lg bg-emerald-500/20 text-emerald-400 flex items-center justify-center font-bold flex-shrink-0">15s</div>
+                                <div>
+                                    <h4 class="text-white font-bold mb-1">State the Problem & Cause</h4>
+                                    <p class="text-sm text-slate-400">Identify the issue clearly and say why it happens.</p>
+                                </div>
+                            </div>
+                            <div class="flex items-start gap-4 bg-slate-900/60 p-4 rounded-xl border border-slate-700">
+                                <div class="w-10 h-10 rounded-lg bg-amber-500/20 text-amber-400 flex items-center justify-center font-bold flex-shrink-0">15s</div>
+                                <div>
+                                    <h4 class="text-white font-bold mb-1">Propose a Solution</h4>
+                                    <p class="text-sm text-slate-400">Introduce your main idea to fix the issue.</p>
+                                </div>
+                            </div>
+                            <div class="flex items-start gap-4 bg-slate-900/60 p-4 rounded-xl border border-slate-700">
+                                <div class="w-10 h-10 rounded-lg bg-sky-500/20 text-sky-400 flex items-center justify-center font-bold flex-shrink-0">20s</div>
+                                <div>
+                                    <h4 class="text-white font-bold mb-1">Explain How it Works (Detail)</h4>
+                                    <p class="text-sm text-slate-400">Give a specific example of how this solution changes things.</p>
+                                </div>
+                            </div>
+                            <div class="flex items-start gap-4 bg-slate-900/60 p-4 rounded-xl border border-slate-700">
+                                <div class="w-10 h-10 rounded-lg bg-purple-500/20 text-purple-400 flex items-center justify-center font-bold flex-shrink-0">10s</div>
+                                <div>
+                                    <h4 class="text-white font-bold mb-1">Conclusion</h4>
+                                    <p class="text-sm text-slate-400">Summarize with a strong final thought.</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Language Arsenal -->
+                    <div class="glass-panel p-6 md:p-8 rounded-3xl border border-slate-700 bg-slate-800/40">
+                        <h3 class="text-lg font-bold text-white uppercase tracking-widest mb-4">Language Arsenal</h3>
+                        <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                            <div class="bg-slate-900 p-4 rounded-lg border border-slate-700">
+                                <span class="text-xs text-rose-400 font-bold uppercase tracking-widest mb-2 block">The Problem</span>
+                                <ul class="text-sm text-slate-300 space-y-1">
+                                    <li>"One of the major issues is..."</li>
+                                    <li>"This problem primarily stems from..."</li>
+                                </ul>
+                            </div>
+                            <div class="bg-slate-900 p-4 rounded-lg border border-slate-700">
+                                <span class="text-xs text-emerald-400 font-bold uppercase tracking-widest mb-2 block">The Solution</span>
+                                <ul class="text-sm text-slate-300 space-y-1">
+                                    <li>"A highly effective solution would be..."</li>
+                                    <li>"To tackle this, we should..."</li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+
+                <!-- Right Column: Interactive Timer & Prompt -->
+                <div class="lg:col-span-5 flex flex-col">
+                    <div class="glass-panel p-8 rounded-3xl border-t-4 border-t-amber-500 h-full flex flex-col items-center justify-center text-center relative overflow-hidden">
+                        
+                        <div class="mb-6 w-full">
+                            <span class="bg-amber-500/20 text-amber-400 px-3 py-1 rounded text-xs font-bold uppercase tracking-widest border border-amber-500/50">Practice Prompt</span>
+                            <p class="text-lg text-white font-medium mt-4 leading-snug">"Many teenagers suffer from stress due to social media and school pressure. What are some solutions to this problem?"</p>
+                        </div>
+
+                        <!-- Timer Display -->
+                        <div class="relative w-48 h-48 mb-8 flex items-center justify-center">
+                            <svg class="w-full h-full timer-circle" viewBox="0 0 100 100">
+                                <circle cx="50" cy="50" r="45" fill="none" stroke="#1e293b" stroke-width="6"></circle>
+                                <circle id="timer-path" cx="50" cy="50" r="45" fill="none" stroke="#f59e0b" stroke-width="6" stroke-dasharray="283" stroke-dashoffset="0" style="transition: stroke-dashoffset 1s linear, stroke 0.3s;"></circle>
+                            </svg>
+                            <div class="absolute flex flex-col items-center">
+                                <span id="timer-text" class="text-5xl font-bold text-white font-mono">60</span>
+                                <span id="timer-phase" class="text-xs uppercase tracking-widest text-amber-400 font-bold mt-1">Prep Time</span>
+                            </div>
+                        </div>
+
+                        <div class="flex gap-3 w-full justify-center">
+                            <button id="btn-start" onclick="startExamTimer()" class="bg-emerald-600 hover:bg-emerald-500 text-white font-bold py-3 px-8 rounded-full uppercase tracking-widest text-sm transition-all shadow-[0_0_15px_rgba(16,185,129,0.4)]">
+                                Start Clock
+                            </button>
+                            <button id="btn-reset" onclick="resetTimer()" class="bg-slate-700 hover:bg-slate-600 text-white font-bold py-3 px-6 rounded-full uppercase tracking-widest text-sm transition-all hidden">
+                                Reset
+                            </button>
+                        </div>
+
+                    </div>
+                </div>
+
+            </div>
+        </div>
+
+    </main>
+
+    <script>
+        // --- Tab Switching Logic ---
+        function switchTab(tab) {
+            // Update Buttons
+            document.getElementById('btn-writing').classList.remove('active', 'writing');
+            document.getElementById('btn-speaking').classList.remove('active', 'speaking');
+            
+            const activeBtn = document.getElementById(`btn-${tab}`);
+            activeBtn.classList.add('active', tab);
+
+            // Update Content
+            document.getElementById('writing-tab').classList.remove('active');
+            document.getElementById('speaking-tab').classList.remove('active');
+            document.getElementById(`${tab}-tab`).classList.add('active');
+        }
+
+        // --- Interactive Timer Logic ---
+        let timerInterval;
+        let timeLeft = 60;
+        let phase = 'prep'; // 'prep' or 'speak'
+        const FULL_DASH_ARRAY = 283;
+
+        const timerText = document.getElementById('timer-text');
+        const timerPhase = document.getElementById('timer-phase');
+        const timerPath = document.getElementById('timer-path');
+        const btnStart = document.getElementById('btn-start');
+        const btnReset = document.getElementById('btn-reset');
+
+        function startExamTimer() {
+            btnStart.classList.add('hidden');
+            btnReset.classList.remove('hidden');
+            
+            clearInterval(timerInterval);
+            
+            timerInterval = setInterval(() => {
+                timeLeft--;
+                updateTimerUI();
+
+                if (timeLeft <= 0) {
+                    if (phase === 'prep') {
+                        // Switch to Speaking Phase
+                        phase = 'speak';
+                        timeLeft = 60;
+                        timerPhase.textContent = "Speaking Time";
+                        timerPhase.className = "text-xs uppercase tracking-widest text-rose-400 font-bold mt-1";
+                        timerPath.style.stroke = "#f43f5e"; // Rose color for speaking
+                        playSound(); // Optional: Beep sound
+                    } else {
+                        // End of Speaking Phase
+                        clearInterval(timerInterval);
+                        timerText.textContent = "0";
+                        timerPhase.textContent = "Time's Up!";
+                        timerPath.style.stroke = "#64748b"; // Grey
+                    }
+                }
+            }, 1000);
+        }
+
+        function updateTimerUI() {
+            timerText.textContent = timeLeft;
+            
+            // Calculate stroke offset
+            const offset = FULL_DASH_ARRAY - (timeLeft / 60) * FULL_DASH_ARRAY;
+            timerPath.style.strokeDashoffset = offset;
+        }
+
+        function resetTimer() {
+            clearInterval(timerInterval);
+            phase = 'prep';
+            timeLeft = 60;
+            
+            timerText.textContent = "60";
+            timerPhase.textContent = "Prep Time";
+            timerPhase.className = "text-xs uppercase tracking-widest text-amber-400 font-bold mt-1";
+            
+            timerPath.style.strokeDashoffset = 0;
+            timerPath.style.stroke = "#f59e0b"; // Amber color
+            
+            btnStart.classList.remove('hidden');
+            btnReset.classList.add('hidden');
+        }
+
+        function playSound() {
+            // Simple beep using Web Audio API
+            const ctx = new (window.AudioContext || window.webkitAudioContext)();
+            const osc = ctx.createOscillator();
+            const gainNode = ctx.createGain();
+            osc.connect(gainNode);
+            gainNode.connect(ctx.destination);
+            osc.type = 'sine';
+            osc.frequency.value = 800;
+            gainNode.gain.setValueAtTime(0.1, ctx.currentTime);
+            osc.start();
+            setTimeout(() => osc.stop(), 500);
+        }
+
+        // --- STREAMING_CHUNK: Initializing Drag & Drop and UI Logic ---
+        
+        // Logic for "Activity 1: Drag and Drop Intro"
+        const sortableList = document.getElementById('sortable-list');
+        let draggedItem = null;
+
+        sortableList.addEventListener('dragstart', (e) => {
+            if(e.target.classList.contains('sortable-item')) {
+                draggedItem = e.target;
+                setTimeout(() => e.target.classList.add('dragging'), 0);
+            }
+        });
+
+        sortableList.addEventListener('dragend', (e) => {
+            if(e.target.classList.contains('sortable-item')) {
+                setTimeout(() => e.target.classList.remove('dragging'), 0);
+                draggedItem = null;
+            }
+        });
+
+        sortableList.addEventListener('dragover', (e) => {
+            e.preventDefault();
+            const afterElement = getDragAfterElement(sortableList, e.clientY);
+            const currentItem = document.querySelector('.dragging');
+            if(currentItem) {
+                if (afterElement == null) {
+                    sortableList.appendChild(currentItem);
+                } else {
+                    sortableList.insertBefore(currentItem, afterElement);
+                }
+            }
+        });
+
+        function getDragAfterElement(container, y) {
+            const draggableElements = [...container.querySelectorAll('.sortable-item:not(.dragging)')];
+            return draggableElements.reduce((closest, child) => {
+                const box = child.getBoundingClientRect();
+                const offset = y - box.top - box.height / 2;
+                if (offset < 0 && offset > closest.offset) {
+                    return { offset: offset, element: child };
+                } else {
+                    return closest;
+                }
+            }, { offset: Number.NEGATIVE_INFINITY }).element;
+        }
+
+        // Smartboard friendly Up/Down buttons
+        function moveUp(btn) {
+            let item = btn.closest('.sortable-item');
+            if(item.previousElementSibling) {
+                item.parentNode.insertBefore(item, item.previousElementSibling);
+                resetFeedback();
+            }
+        }
+
+        function moveDown(btn) {
+            let item = btn.closest('.sortable-item');
+            if(item.nextElementSibling) {
+                item.parentNode.insertBefore(item.nextElementSibling, item);
+                resetFeedback();
+            }
+        }
+
+        function resetFeedback() {
+            document.getElementById('sortable-feedback').classList.add('hidden');
+        }
+
+        function checkIntroOrder() {
+            const items = document.querySelectorAll('#sortable-list .sortable-item');
+            const feedback = document.getElementById('sortable-feedback');
+            feedback.classList.remove('hidden', 'text-emerald-400', 'text-rose-400');
+            
+            if(items[0].dataset.type === 'hook' && items[1].dataset.type === 'bridge' && items[2].dataset.type === 'thesis') {
+                feedback.textContent = "Perfect! Hook ➔ Bridge ➔ Thesis";
+                feedback.classList.add('text-emerald-400');
+            } else {
+                feedback.textContent = "Incorrect. Remember: Hook ➔ Bridge ➔ Thesis.";
+                feedback.classList.add('text-rose-400');
+            }
+        }
+
+        // Logic for "Activity 2: Missing Links"
+        function toggleExampleAnswers() {
+            const el = document.getElementById('example-answers');
+            if(el.classList.contains('hidden')) {
+                el.classList.remove('hidden');
+            } else {
+                el.classList.add('hidden');
+            }
+        }
+
+        function toggleAnswer(id) {
+            const el = document.getElementById(id);
+            if(el.classList.contains('hidden')) {
+                el.classList.remove('hidden');
+            } else {
+                el.classList.add('hidden');
+            }
+        }
+
+        function saveWork() {
+            const hook = document.getElementById('hook-input').value;
+            const thesis = document.getElementById('thesis-input').value;
+            const ex1 = document.getElementById('ex1-input').value;
+            const ex2 = document.getElementById('ex2-input').value;
+
+            localStorage.setItem('examPrep_hook', hook);
+            localStorage.setItem('examPrep_thesis', thesis);
+            localStorage.setItem('examPrep_ex1', ex1);
+            localStorage.setItem('examPrep_ex2', ex2);
+
+            const btnTexts = document.querySelectorAll('.save-btn-text');
+            btnTexts.forEach(btnText => {
+                const originalText = btnText.textContent;
+                btnText.textContent = "Saved!";
+                setTimeout(() => {
+                    btnText.textContent = originalText;
+                }, 2000);
+            });
+        }
+
+        function loadWork() {
+            const hook = localStorage.getItem('examPrep_hook');
+            const thesis = localStorage.getItem('examPrep_thesis');
+            const ex1 = localStorage.getItem('examPrep_ex1');
+            const ex2 = localStorage.getItem('examPrep_ex2');
+
+            if (hook) document.getElementById('hook-input').value = hook;
+            if (thesis) document.getElementById('thesis-input').value = thesis;
+            if (ex1) document.getElementById('ex1-input').value = ex1;
+            if (ex2) document.getElementById('ex2-input').value = ex2;
+        }
+
+        // Load work when page is ready
+        document.addEventListener('DOMContentLoaded', loadWork);
+
+    </script>
+</body>
+</html>
